@@ -9,5 +9,5 @@ FROM openjdk:11.0
 WORKDIR /app
 # in pom.xml file the tag <finalName> is the .jar file name
 COPY --from=build /app/target/devops-integration.jar /app
-EXPOSE 9090
+EXPOSE 8080
 CMD ["java", "-jar", "devops-integration.jar"]
