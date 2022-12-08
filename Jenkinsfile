@@ -33,10 +33,10 @@ pipeline{
                     withCredentials([string(credentialsId: 'nexus-uname-pwd', variable: 'nexus')]) {
                         // here we use ${nexus} coz we dont want to see the nexus password to other
                             sh '''
-                            docker build -t http://44.195.38.176:8083/dockerhub:${VERSION} .
+                            docker build -t 44.195.38.176:8083/dockerhub:${VERSION} .
                             docker login  -u admin -p ${nexus} 44.195.38.176:8083
-                            docker push http://44.195.38.176:8083/dockerhub:${VERSION}
-                            docker rmi  http://44.195.38.176:8083/dockerhub:${VERSION}
+                            docker push 44.195.38.176:8083/dockerhub:${VERSION}
+                            docker rmi  44.195.38.176:8083/dockerhub:${VERSION}
                             '''
                                     }
             }
