@@ -24,25 +24,9 @@ pipeline{
                 script{
                     waitForQualityGate abortPipeline: false, credentialsId: 'sonar-token'
                 }
-            }
-        }
+            }}
 
-        stage('Docker Image Build and Push To Nexus Repo'){
-            steps{
-                script{
-                    withCredentials([string(credentialsId: 'nexus-uname-pwd', variable: 'nexus')]) {
-                        // here we use ${nexus} coz we dont want to see the nexus password to other
-                            sh '''
-                            docker build -t http://44.195.38.176:8083/dockerhub:${VERSION} .
-                            docker login  -u admin -p ${nexus} 44.195.38.176:8083
-                            docker push http://44.195.38.176:8083/dockerhub:${VERSION}
-                            docker rmi  http://44.195.38.176:8083/dockerhub:${VERSION}
-
-                            '''
-                                    }
-            }
-        }
-
+        
 
 
 
