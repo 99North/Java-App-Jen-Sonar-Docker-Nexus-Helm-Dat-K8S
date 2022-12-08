@@ -27,24 +27,25 @@ pipeline{
             }
         }
 
-        // stage('Docker Image Build and Push To Nexus Repo'){
-        //     steps{
-        //         script{
-        //             withCredentials([string(credentialsId: 'nexus', variable: 'nexus_creds')]) {
-        //                     //  here <docker build -t 3.235.67.253:8083/springapp:${VERSION} .> means it will go to particular repo so we give the ip address of nexus docker repo
-        //                      sh ''=-09876w
-                                    
-        //                              docker build -t 3.235.67.253:8083/springapp:${VERSION} .
-        //                              docker login -u admin -p ${nexus_creds} 3.235.67.253:8083
-        //                              docker push 3.235.67.253:8083/springapp:${VERSION}
-        //                              docker rmi 3.235.67.253:8083/springapp:${VERSION}
+        stage('Docker Image Build and Push To Nexus Repo'){
+            steps{
+                script{
+                    withCredentials([string(credentialsId: 'nexus-uname-pwd', variable: 'nexus')]) {
+                        // here we use ${nexus} coz we dont want to see the nexus password to other
+                            sh '''
+                            docker build -t http://44.195.38.176:8083/dockerhub:${VERSION} .
+                            docker login  -u admin -p ${nexus} 44.195.38.176:8083
+                            docker push http://44.195.38.176:8083/dockerhub:${VERSION}
+                            docker rmi  http://44.195.38.176:8083/dockerhub:${VERSION}
 
-        //                         '''
-        //                                         }
-                    
+                            '''
+                                    }
+            }
+        }
 
-        //         }
-        //     }
-        // }
+
+
+
+
     }
 }
