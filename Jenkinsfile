@@ -44,7 +44,7 @@ pipeline{
             }
         }
 
-        stage{
+        stage('Misconfiguration'){
             steps{
                 script{
                     dir('kubernetes/myapp/'){
