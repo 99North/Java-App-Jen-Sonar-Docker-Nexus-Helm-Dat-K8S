@@ -19,13 +19,13 @@ pipeline{
             }
         }
 
-        // stage('Quality Gate Status'){
-        //     steps{
-        //         script{
-        //             waitForQualityGate abortPipeline: false, credentialsId: 'sonar-token'
-        //         }
-        //     }
-        // }
+        stage('Quality Gate Status'){
+            steps{
+                script{
+                    waitForQualityGate abortPipeline: false, credentialsId: 'sonar-token'
+                }
+            }
+        }
 
         // stage('Docker Image Build and Push To Nexus Repo'){
         //     steps{
